@@ -13,13 +13,14 @@ class App extends React.Component {
     };
   }
   
-  onClick(vid) {
+  handleClick(vid) {
     this.setState({
       currentVid: vid
     });
   }
   
   render() {
+  console.log(this.state.currentVid)
     return (
       <div>
         <nav className="navbar">
@@ -32,7 +33,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVid} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.currentList} click={this.onClick} app={this} />
+            <VideoList videos={this.state.currentList} passClick={this.handleClick.bind(this)}/>
           </div>
         </div>
       </div>
@@ -40,6 +41,7 @@ class App extends React.Component {
   }  
 }
 
+//
 // <VideoPlayer video={exampleVideoData} />
 
 //ReactDOM.render(<VideoList />, document.getElementById("videolist"));
