@@ -1,46 +1,23 @@
-var searchYouTube = (options, callback) => {
+import exampleVideoData from "/src/data/exampleVideoData.js";
 
-  // $.get("https://www.googleapis.com/youtube/v3/search", 
-  //   {'maxResults': options.max,'q': options.query,'key': options.key, part: 'snippet'}, 
-  //   function(data) {
-  //     callback(data);}
-  // ).done(
-  //   function() {
-  //     console.log(data);
-  //     console.log("success");
-  //   }
-  // ).fail(
-  //   function() {
-  //     console.log('e');
-  //   }
-  // );
+var searchYouTube = (options, callback) => {
   
-  $.ajax({
-    url: 'https://www.googleapis.com/youtube/v3/search',
-    type: 'GET',
-    data: {'maxResults': options.max,
-           'q': options.query,
-           'key': options.key,
-           part: 'snippet'
-         },
-    error: function() {
-      console.log("didn't work");
-    }
-  }).done(function(data) {
-      callback(data);
-      console.log(data);
-  });
+  $.get("https://www.googleapis.com/youtube/v3/search", {
+    'maxResults': options.max,
+    'q': options.query,
+    'key': options.key, 
+    part: 'snippet', 
+    type: 'video', 
+    videoEmbeddable: true
+  })
+  .done(
+    function(data) {
+      callback(data.items);
+    })
+  .fail(
+    function() {
+      console.log('e');
+    });
 };
 
 export default searchYouTube;
-
-
-
-// buildApiRequest('GET',
-//                 '/youtube/v3/search',
-//                 {'maxResults': '25',
-//                  'part': 'snippet',
-//                  'q': 'surfing',
-//                  'type': ''});
-//
-//GET https://www.googleapis.com/youtube/v3/search
