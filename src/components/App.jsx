@@ -8,15 +8,15 @@ class App extends React.Component {
     super(props);
     
     this.state = {
-      currentList: {exampleVideoData},
-      currentVid: {exampleVideoData[0]}
+      currentList: exampleVideoData,
+      currentVid: exampleVideoData[0]
     };
   }
   
-  onClick() {
+  onClick(vid) {
     this.setState({
-      currentList: 
-    })
+      currentVid: vid
+    });
   }
   
   render() {
@@ -29,17 +29,18 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={exampleVideoData[0]} />
+            <VideoPlayer video={this.state.currentVid} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} />
+            <VideoList videos={this.state.currentList} click={this.onClick} app={this} />
           </div>
         </div>
       </div>
-    )
+    );
   }  
 }
 
+// <VideoPlayer video={exampleVideoData} />
 
 //ReactDOM.render(<VideoList />, document.getElementById("videolist"));
 // In the ES6 spec, files are "modules" and do not share a top-level scope
