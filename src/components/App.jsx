@@ -18,8 +18,8 @@ class App extends React.Component {
   handleSearch(search) {
     // call searchYouTube with query from button
     this.setState({
-      currentList: 
-      currentVid: 
+      //currentList: 
+      //currentVid: 
     });
   }
   

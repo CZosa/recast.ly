@@ -1,26 +1,36 @@
 var searchYouTube = (options, callback) => {
-  // use jQuery to send GET request to the search endpoint
-  // $.ajax({
-  //   url: 'https://www.googleapis.com/youtube/v3/search',
-  //   type: 'GET',
-  //   data: {'maxResults': options.max,
-  //          'q': options.query,
-  //          'key': options.key,
-  //          //'type': "video"
-  //        },
-  //   // error: function() {
-  //   //   console.log("didn't work")}
-  // }).done(function(data) {
-  //     callback(data);
-  // });
+
+  // $.get("https://www.googleapis.com/youtube/v3/search", 
+  //   {'maxResults': options.max,'q': options.query,'key': options.key, part: 'snippet'}, 
+  //   function(data) {
+  //     callback(data);}
+  // ).done(
+  //   function() {
+  //     console.log(data);
+  //     console.log("success");
+  //   }
+  // ).fail(
+  //   function() {
+  //     console.log('e');
+  //   }
+  // );
   
-  $.get("https://www.googleapis.com/youtube/v3/search", 
-    {'maxResults': options.max,'q': options.query,'key': options.key}, 
-    function(data) {callback(data)}
-  ).done(function() {
-    console.log("success");
-  })
-}
+  $.ajax({
+    url: 'https://www.googleapis.com/youtube/v3/search',
+    type: 'GET',
+    data: {'maxResults': options.max,
+           'q': options.query,
+           'key': options.key,
+           part: 'snippet'
+         },
+    error: function() {
+      console.log("didn't work");
+    }
+  }).done(function(data) {
+      callback(data);
+      console.log(data);
+  });
+};
 
 export default searchYouTube;
 
