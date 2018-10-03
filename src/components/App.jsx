@@ -2,7 +2,8 @@ import VideoList from "./VideoList.js";
 import VideoListEntry from "./VideoListEntry.js";
 import VideoPlayer from "./VideoPlayer.js";
 import exampleVideoData from "/src/data/exampleVideoData.js";
-import searchYouTube from "../lib/searchYouTube.js";
+import YOUTUBE_API_KEY from '/src/config/youtube.js';
+import searchYouTube from "/src/lib/searchYouTube.js";
 import Search from "./Search.js";
 
 class App extends React.Component {
@@ -10,16 +11,24 @@ class App extends React.Component {
     super(props);
     
     this.state = {
-      currentList: exampleVideoData,
+      currentList: [],
       currentVid: exampleVideoData[0]
     };
   }
   
-  handleSearch(search) {
-    // call searchYouTube with query from button
-    this.setState({
-      //currentList: 
-      //currentVid: 
+  componentDidMount() {
+    searchYouTube({ key: YOUTUBE_API_KEY, query: 'cats', max: 10 },
+      (data) => {this.setState(
+        {currentList: data.items, currentVid: data.items[0]}
+      )
+    });
+  }
+  
+  handleSearch(event) {
+    searchYouTube({ key: YOUTUBE_API_KEY, query: event.target.value, max: 10 },
+      (data) => {this.setState(
+        {currentList: data.items, currentVid: data.items[0]}
+      )
     });
   }
   
