@@ -5,6 +5,7 @@ import exampleVideoData from "/src/data/exampleVideoData.js";
 import YOUTUBE_API_KEY from '/src/config/youtube.js';
 import searchYouTube from "/src/lib/searchYouTube.js";
 import Search from "./Search.js";
+//import debounce from "/node_modules/lodash/debounce.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,17 +19,22 @@ class App extends React.Component {
   
   componentDidMount() {
     searchYouTube({ key: YOUTUBE_API_KEY, query: 'cats', max: 10 },
-      (data) => {this.setState(
-        {currentList: data.items, currentVid: data.items[0]}
-      )
-    });
+      (data) => {
+        this.setState(
+          {
+            currentList: data.items, currentVid: data.items[0]
+          }
+        );
+      });
   }
   
   handleSearch(event) {
-    searchYouTube({ key: YOUTUBE_API_KEY, query: event.target.value, max: 10 },
-      (data) => {this.setState(
+    searchYouTube({ 
+      key: YOUTUBE_API_KEY, query: event.target.value, max: 10 },
+    (data) => {
+      this.setState(
         {currentList: data.items, currentVid: data.items[0]}
-      )
+      );
     });
   }
   

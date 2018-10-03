@@ -20,4 +20,6 @@ var searchYouTube = (options, callback = () => {}) => (
       })
 );
 
+searchYouTube = _.debounce(searchYouTube, 500);
+
 export default searchYouTube;
